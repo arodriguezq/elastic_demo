@@ -29,7 +29,7 @@ public class DataService {
     }
 
     public List<String> queryTwo() {
-        QueryBuilder query = multiMatchQuery("references", "cia").analyzer("english");
+        QueryBuilder query = multiMatchQuery("cia", "references").analyzer("english");
         SearchHit[] hits = client.prepareSearch("twitter").setQuery(query).execute().actionGet().getHits().getHits();
         List<String> list = new ArrayList<String>();
         for (SearchHit hit : hits) {
@@ -40,7 +40,7 @@ public class DataService {
 
     public List<String> queryThree() {
         MultiMatchQueryBuilder query
-                = new MultiMatchQueryBuilder("gobernment").field("text").analyzer("english").fuzziness("AUTO");
+                = new MultiMatchQueryBuilder("gobernment").field("text").fuzziness("AUTO");
         SearchHit[] hits = client.prepareSearch("twitter").setQuery(query).execute().actionGet().getHits().getHits();
         List<String> list = new ArrayList<String>();
         for (SearchHit hit : hits) {
