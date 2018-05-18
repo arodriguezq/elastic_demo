@@ -15,7 +15,7 @@ public class App {
         App app = new App();
 
         ESManager esManager = new ESManager();
-        Client client = esManager.getClient("192.168.2.41", 9200).get();
+        Client client = esManager.getClient("localhost", 9300).get();
 
         DataService dataService = new DataService(client);
         DeleteService deleteService = new DeleteService(client);
