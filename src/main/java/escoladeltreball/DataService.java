@@ -54,7 +54,6 @@ public class DataService {
         SearchHit[] hits = client.prepareSearch("twitter").setQuery(query).execute().actionGet().getHits().getHits();
         List<String> list = new ArrayList<String>();
         for (SearchHit hit : hits) {
-            // hit.sourceAsMap()
             list.add(hit.getSourceAsString());
         }
         return list;

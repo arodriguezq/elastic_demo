@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class ESManager {
 
-
     public Optional<Client> getClient(String host, int port) {
         try {
             Settings.Builder setting = Settings.builder().put("client.transport.sniff", false);
@@ -24,6 +23,4 @@ public class ESManager {
             return Optional.empty();
         }
     }
-
-
 }

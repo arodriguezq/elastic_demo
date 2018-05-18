@@ -1,7 +1,5 @@
 package escoladeltreball;
 
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.client.Client;
 
 import java.io.IOException;
@@ -29,10 +27,6 @@ public class App {
         dataService.queryFour().forEach(item -> System.out.println(item));
 
         client.close();
-    }
-
-    private void deleteIndex(Client client) {
-        DeleteIndexResponse deleteResponse = client.admin().indices().delete(new DeleteIndexRequest("twitter")).actionGet();
     }
 
     public void initialInserts(Client client) throws IOException {
