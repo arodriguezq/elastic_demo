@@ -10,7 +10,6 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 public class App {
 
-
     public static void main(String[] args) throws IOException {
         App app = new App();
 
@@ -22,42 +21,16 @@ public class App {
 
         //app.deleteIndex(client);
         app.initialInserts(client);
-        // Buscar libros que contengan “in Action”  en su título
-        System.out.println("#=> Busca los tweets que contengan la palabra \"tweet\" o \"twitter\".");
+        System.out.println("\n\n#=> Busca los tweets que contengan la palabra \"tweet\" o \"twitter\".");
         dataService.queryOne().forEach(item -> System.out.println(item));
-        // Buscar libros que contengan “elasticsearch guide”  en su título o descripcion
-        //dataService.getQueryData2().forEach(item -> System.out.println(item));
-        // Buscar libros que contengan “elasticsearch guide”  en su título o descripcion, pero dandole mas importancio a los que lo tengan en la descripcion
-        //dataService.getQueryData3().forEach(item -> System.out.println(item));
-        //Busca libros que contengan "Elasticsearch" o "Solr" en el título y que su autor sea "clinton gormley" y no "radu gheorge"
-        //dataService.getQueryData4().forEach(item -> System.out.println(item));
-        //Buscar libros que contengan "comprihensiv guide" paara comprobar fuzzines
-        //dataService.getQueryData5().forEach(item -> System.out.println(item));
-        //Buscar los libros cuyos autores comienzen por la letra t
-        //dataService.getQueryData6().forEach(item -> System.out.println(item));
-        //Buscar los libros que contengan las palabras "search engine" en su título o descripción juntas o como mucho a una distancia de 3
-        //dataService.getQueryData7().forEach(item -> System.out.println(item));
-
-   /*     // Data
-        System.out.println("\ngetMatchAllQueryData from ES::: ");
-        dataService.getMatchAllQueryData().forEach(item -> System.out.println(item));*/
-      /*  System.out.println("\ngetBoolQueryData from ES::: ");
-        dataService.getBoolQueryData().forEach(item -> System.out.println(item));
-
-
-
-        System.out.println("\ngetPhraseQueryData from ES::: ");
-        dataService.getPhraseQueryData().forEach(item -> System.out.println(item));
-
-
-        // Delete
-        // delete one record by id
-        //System.out.println("delete by id " + deleteService.delete("AVSMh1LBWlqOklhqtVNs"));
-        //delete record by query
-        System.out.println("delete by query " + deleteService.deleteByQuery("samuel"));*/
+        System.out.println("\n\n#=> Busca los tweets con referencia a la CIA");
+        dataService.queryTwo().forEach(item -> System.out.println(item));
+        System.out.println("\n\n#=> Busca los tweets que contengan la palabra gobernment (mal escrita)");
+        dataService.queryThree().forEach(item -> System.out.println(item));
+        System.out.println("\n\n#=> Busca los tweets que contengan la cia tanto en referencia como en texto dándole a este último más relevancia");
+        dataService.queryFour().forEach(item -> System.out.println(item));
 
         client.close();
-
     }
 
     private void deleteIndex(Client client) {
@@ -128,7 +101,7 @@ public class App {
                         .field("user", "cia")
                         .field("publish_date", "2018-05-19")
                         .field("likes", "20")
-                        .field("references", "aitor")
+                        .field("references", "aitor cia")
                         .endObject()
                 ).get();
     }

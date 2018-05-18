@@ -22,7 +22,7 @@ public class DeleteService {
 
     public String delete(String id) {
 
-        return client.prepareDelete("library", "book", id).get().getResult().toString();
+        return client.prepareDelete("twitter", "tweet", id).get().getResult().toString();
     }
 
     public long deleteByQuery(String name) {
