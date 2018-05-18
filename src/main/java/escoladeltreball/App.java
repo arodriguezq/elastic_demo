@@ -26,7 +26,7 @@ public class App {
         System.out.println("\n\n#=> Busca los tweets que contengan la palabra gobernment (mal escrita)");
         dataService.queryThree().forEach(System.out::println);
         System.out.println("\n\n#=> Busca los tweets que contengan la cia tanto en referencia como en texto dándole a este último más relevancia");
-        dataService.queryFour().forEach(System.out::println);
+        dataService.queryFour().forEach(item -> System.out.println(item));
 
         client.close();
     }
