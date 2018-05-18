@@ -17,26 +17,23 @@ public class App {
         Client client = esManager.getClient("localhost", 9300).get();
 
         DataService dataService = new DataService(client);
-        DeleteService deleteService = new DeleteService(client);
 
-        //app.deleteIndex(client);
         app.initialInserts(client);
         System.out.println("\n\n#=> Busca los tweets que contengan la palabra \"tweet\" o \"twitter\".");
-        dataService.queryOne().forEach(item -> System.out.println(item));
+        dataService.queryOne().forEach(System.out::println);
         System.out.println("\n\n#=> Busca los tweets con referencia a la CIA");
-        dataService.queryTwo().forEach(item -> System.out.println(item));
+        dataService.queryTwo().forEach(System.out::println);
         System.out.println("\n\n#=> Busca los tweets que contengan la palabra gobernment (mal escrita)");
-        dataService.queryThree().forEach(item -> System.out.println(item));
+        dataService.queryThree().forEach(System.out::println);
         System.out.println("\n\n#=> Busca los tweets que contengan la cia tanto en referencia como en texto dándole a este último más relevancia");
-        dataService.queryFour().forEach(item -> System.out.println(item));
+        dataService.queryFour().forEach(System.out::println);
 
         client.close();
     }
 
     private void deleteIndex(Client client) {
-        DeleteIndexResponse deleteResponse = client.admin().indices().delete(new DeleteIndexRequest("library")).actionGet();
+        DeleteIndexResponse deleteResponse = client.admin().indices().delete(new DeleteIndexRequest("twitter")).actionGet();
     }
-
 
     public void initialInserts(Client client) throws IOException {
         client.prepareIndex("twitter", "tweet", "1")
