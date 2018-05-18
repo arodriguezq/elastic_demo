@@ -65,7 +65,7 @@ public class DataService {
     public List<String> queryOne() {
         QueryBuilder query = matchQuery("title", "tweet twitter").analyzer("english");
 //        System.out.println("Query 1 =>" + query.toString());
-        SearchHit[] hits = client.prepareSearch("library").setQuery(query).execute().actionGet().getHits().getHits();
+        SearchHit[] hits = client.prepareSearch("twitter").setQuery(query).execute().actionGet().getHits().getHits();
         List<String> list = new ArrayList<String>();
         for (SearchHit hit : hits) {
             // hit.sourceAsMap()
